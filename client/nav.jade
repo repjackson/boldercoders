@@ -1,51 +1,32 @@
 template(name='nav')
     .ui.fluid.attached.borderless.inverted.small.menu.topnav
         a.item(href="/" class="{{isActivePath 'home'}}")
-            +icon name='circled'
-            // i.large.tree.icon
+            i.large.code.icon
         if currentUser
-            a.item.set_user(href="/users" class="{{isActiveRoute 'users'}}" title='players')
-                +icolor name='conference-call'
-                // i.large.users.icon
+            a.item.set_user(href="/users" class="{{isActiveRoute 'users'}}" title='members')
+                i.large.users.icon
                 // span.mobile.hidden members
             a.item.set_event(href="/m/event" class="{{isActiveRoute 'events'}}" title='events')
-                +icolor name='calendar'
-                // i.large.calendar.icon
+                i.large.calendar.icon
                 // span.mobile.hidden events
-            a.item.set_shift(href="/m/shift" class="{{isActiveRoute 'shifts'}}" title='shifts')
-                // i.large.clock.icon
-                +icolor name='clock'
-                // span.mobile.hidden shifts
             // a.item(href="/shop" class="{{isActiveRoute 'shop'}}" title='shop')
-            a.item.set_product(href="/m/product" class="{{isActiveRoute 'shop'}}" title='shop')
-                // i.large.shop.icon
-                +icolor name='shop'
+            // a.item.set_product(href="/m/product" class="{{isActiveRoute 'shop'}}" title='shop')
+            //     i.large.shop.icon
+            //     +iios name='shop'
             a.item.set_discussion(href="/discussions" class="{{isActiveRoute 'discussions'}}" title='discussions')
-                // i.large.shop.icon
-                +icolor name='speech-bubble-with-dots'
-                
-                // span.mobile.hidden shop
-            // a.item(href="/gifts" class="{{isActiveRoute 'gifts'}}" title='gifts')
-            //     i.big.gift.icon
-                // span.mobile.hidden gifts
-            // a.item(href="/requests" class="{{isActiveRoute 'requests'}}" title='requests')
+                i.large.chat.icon
+            a.item.set_discussion(href="/m/group" class="{{isActiveRoute 'discussions'}}" title='groups')
+                i.large.users.circular.icon
             a.item.set_request(href="/m/request" class="{{isActiveRoute 'requests'}}" title='requests')
-                // i.large.hand.holding.heart.icon
-                +icolor name='request-service'
+                i.large.hand.holding.heart.icon
+                // +iios name='request-service'
                 // span.mobile.hidden requests
-            a.item.set_badge(href="/m/badge" class="{{isActivePath 'badges'}}" title='badges')
-                // i.large.hand.holding.heart.icon
-                +icolor name='prize'
-                // span.mobile.hidden badges
-            a.item.set_project(href="/m/project" class="{{isActivePath regex='projects'}}" title='projects')
-                // i.large.hand.holding.heart.icon
-                +icolor name='project'
+            a.item.set_project(href="/m/gig" class="{{isActivePath 'gigs'}}" title='projects')
+                i.large.wrench.icon
                 // span.mobile.hidden projects
-            a.icon.item(href="/m/location" class="{{isActivePath regex='locations'}}" title='locations')
-                +icolor name='marker'
             if is_admin
                 a.icon.item(href="/m/model" class="{{isActivePath regex='model'}}" title='models')
-                    +icolor name='database'
+                    i.database.icon
         .right.menu
             // a.item.add_gift(class="{{isActivePath regex='gift_edit'}}" title='gift')
             //     i.large.gift.icon
@@ -67,13 +48,11 @@ template(name='nav')
                     else 
                         i.large.user.large.icon
                     |#{currentUser.username}
-                    |#{currentUser.points}
+                    // |#{currentUser.points}
             else
                 a.item(href="/register" title='register')
                     // |login
-                    +icon name='add-user-female'
-                    // i.large.chevron.right.icon
+                    i.large.chevron.right.icon
                 a.item(href="/login" title='login')
                     // |login
-                    +icon name='login-rounded-right'
-                    // i.large.chevron.right.icon
+                    i.large.chevron.right.icon
