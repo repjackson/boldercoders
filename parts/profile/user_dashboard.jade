@@ -1,0 +1,81 @@
+template(name='user_dashboard')
+    // +user_about
+    // .ui.hidden.divider
+    .ui.stackable.four.column.grid
+        .column
+            .ui.inline.header 
+                i.minus.icon
+                |#{total_credit_amount}p
+                |received
+                .ui.basic.circular.label #{credit_count} credits
+                    | ##{global_credit_count_rank}
+            .scrolling
+                each user_credits
+                    .ui.segment
+                        if author.profile_image_id
+                            img.ui.avatar.image(src="{{c.url author.profile_image_id height=200 width=200 gravity='face' crop='fill'}}")
+                        .content
+                            .header
+                                strong #{amount}pt 
+                                |from 
+                                a(href="/user/#{author.username}")
+                                    |#{author.username}
+                            .description
+                                a(href="/debit/#{_id}/view")
+                                    |#{when}
+                        .content
+                            .description
+                                |#{description}
+                                each tags
+                                    .ui.mini.basic.label #{this}
+        .column
+            .ui.inline.spaced.header 
+                +icolor name='filled-sent' 
+                |#{total_send_amount}p
+                |sent
+                small(title='send count') (#{send_count}x)
+                    .ui.circular.label ##{global_send_count_rank}
+            div
+            .scrolling
+                each user_debits
+                    .ui.segment
+                        a(href="/debit/#{_id}/view")
+                            if recipient.profile_image_id
+                                img.ui.avatar.image(src="{{c.url recipient.profile_image_id height=200 width=200 gravity='face' crop='fill'}}")
+                            .header
+                                strong #{amount}pt
+                                |#{when}
+                                | to 
+                                a(href="/user/#{recipient.username}")
+                                    |#{recipient.username}
+                            .description
+                                |#{description}
+                                each tags
+                                    .ui.mini.label #{this}
+                                if is_admin
+                                    +remove_button
+        .column
+            .ui.header 
+                // i.hand.holding.heart.icon
+                +icolor name='request-service'
+                |requests
+            .smallscroll
+                each user_requests
+                    a(href="/request/#{_id}/view")
+                        .ui.segment
+                            .header #{point_bounty}pts: #{title}
+                            |#{description}
+                            |status: #{status}
+                            if complete 
+                                |completed by #{completer.name}
+        .column
+            .ui.header 
+                +icolor name='calendar' cl='ui inline spaced image'
+                |events
+            .smallscroll
+                each user_events
+                    a.ui.segment(href="/event/#{_id}/view")
+                        .header #{title} #{amount}pts
+                        |#{_author.username}
+                        |#{description}
+                        |#{when}

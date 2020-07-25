@@ -1,0 +1,54 @@
+template(name='user_about')
+    .ui.center.aligned.header 
+        i.info.blue.icon
+        |user info
+    with current_user
+        a.ui.compact.button(href="{{c.url genekeys_profile }}" target="_window")
+            +icon name='dna-helix' cl='ui inline mini image'
+            |view gene keys profile
+        .ui.four.column.stackable.grid
+            .column
+                .ui.small.header What do you hope to receive?
+                .smallscroll
+                    |#{profile_hope_receive}
+            .column
+                .ui.small.header What excites you about being apart of this community?
+                .smallscroll
+                    |#{profile_excites_blurb}
+                .spacer
+            .column
+                .ui.small.header What do you want this community to know about you?
+                .smallscroll
+                    |#{profile_community_blurb}
+            .column
+                .ui.small.header What would you like to contribute (think: superpowers, talents, gifts, resources)?
+                .smallscroll
+                    |#{profile_contribute_blurb}
+        if tags 
+            i.blue.large.tags.icon
+            each tags
+                .ui.basic.circular.large.label
+                    |#{this}
+                // +user_info_tag
+        div
+        .ui.small.inline.header levels
+        each levels
+            .ui.basic.label #{this}
+               
+        //- a.ui.basic.compact.button.logout_other_clients(href="#")
+        //-     //- i.globe.icon
+        //-     |log out other clients
+        div
+        .ui.small.inline.header 
+            //- +icon name='shield'
+            i.shield.icon
+            |roles
+        each roles
+            .ui.label #{this}
+
+template(name='user_info_tag')
+    .ui.basic.tertiary.button 
+        if term 
+            if term.image 
+                img.ui.tiny.inline.image(src=term.image)
+        |#{this}
